@@ -49,7 +49,7 @@ public class App {
         Lexar lexar = new Lexar();
         Parser parser = new Parser(lexar);
 
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         if (isValid) {
             System.out.println("Valid JSON");
             System.exit(0);
@@ -67,6 +67,6 @@ public class App {
         Scanner sc = new Scanner(System.in);
         String path = sc.nextLine();
         processJsonFile(path);
-
+        sc.close();
     }
 }

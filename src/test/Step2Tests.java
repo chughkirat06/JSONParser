@@ -16,7 +16,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\valid.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertTrue(isValid);
     }
 
@@ -25,7 +25,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\invalid.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertFalse(isValid);
     }
 
@@ -34,7 +34,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\valid2.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertTrue(isValid);
     }
 
@@ -43,7 +43,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\invalid2.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertFalse(isValid);
     }
 
@@ -52,7 +52,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\escaped_characters.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertTrue(isValid);
     }
 
@@ -61,7 +61,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\extra_comma.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertFalse(isValid);
     }
 
@@ -70,7 +70,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\incorrect_quotes.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertFalse(isValid);
     }
 
@@ -79,7 +79,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\missing_value.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertFalse(isValid);
     }
 
@@ -88,7 +88,7 @@ public class Step2Tests {
         App.readJsonFile("src\\test\\step2\\whitespace.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertTrue(isValid);
     }
 }

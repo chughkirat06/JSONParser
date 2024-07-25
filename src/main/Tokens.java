@@ -12,7 +12,8 @@ public enum Tokens {
     FALSE('f'),
     NULL('n'),
     NUMBER('n'),
-    STRING('s');
+    STRING('s'),
+    INVALID('i');
 
     private final char symbol;
 

@@ -73,11 +73,11 @@ public class Lexar {
                         return Tokens.STRING;
                     if (Character.isDigit(currentChar) || currentChar == '-')
                         return Tokens.NUMBER;
-                    System.out.println("Unexpected character");
-                    return null;
+                    // System.out.println("Unexpected character");
+                    return Tokens.INVALID;
             }
         }
-        return null;
+        return Tokens.INVALID;
     }
 
     private boolean match(String str) {

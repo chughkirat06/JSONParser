@@ -16,7 +16,7 @@ public class Step1Tests {
         App.readJsonFile("src\\test\\step1\\valid.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertTrue(isValid);
     }
 
@@ -25,7 +25,7 @@ public class Step1Tests {
         App.readJsonFile("src\\test\\step1\\invalid.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        boolean isValid = parser.parseObject();
+        boolean isValid = parser.parse();
         assertFalse(isValid);
     }
 
@@ -34,6 +34,6 @@ public class Step1Tests {
         App.readJsonFile("src\\test\\step\\nonexistent.json");
         lexar = new Lexar();
         parser = new Parser(lexar);
-        parser.parseObject();
+        parser.parse();
     }
 }

@@ -32,6 +32,12 @@ public class Parser {
             case NULL:
                 advance();
                 return true;
+            case BRACE_OPEN:
+                return parseObject();
+            case BEGIN_ARRAY:
+                return parseArray();
+            case INVALID:
+                return false;
             default:
                 System.out.println("Unexpected token: " + currentToken);
                 return false;
@@ -52,9 +58,36 @@ public class Parser {
         return false;
     }
 
-    public boolean parseObject() {
+    private boolean parseArray() {
+        if (currentToken == Tokens.BEGIN_ARRAY) {
+            advance();
+            if (currentToken == Tokens.END_ARRAY) {
+                advance();
+                return true;
+            }
+            if (parseValue()) {
+                while (currentToken == Tokens.COMMA) {
+                    advance();
+                    if (!parseValue()) {
+                        return false;
+                    }
+                }
+                if (currentToken == Tokens.END_ARRAY) {
+                    advance(); // Skip the closing bracket
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean parseObject() {
         if (currentToken == Tokens.BRACE_OPEN) {
             advance();
+            if (currentToken == Tokens.BRACE_CLOSE) {
+                advance();
+                return true;
+            }
             if (parseKeyValuePair()) {
                 while (currentToken == Tokens.COMMA) {
                     advance();
@@ -63,11 +96,16 @@ public class Parser {
                     }
                 }
                 if (currentToken == Tokens.BRACE_CLOSE) {
-                    advance();
+                    advance(); // Skip the closing brace
                     return true;
                 }
             }
         }
         return false;
     }
+
+    public boolean parse() {
+        return parseObject() || parseArray();
+    }
+
 }
