@@ -57,10 +57,52 @@ public class Lexar {
                     advance();
                     return Tokens.QUOTE;
                 default:
-                    System.out.println("Unexpected charcter");
-                    return null;
+                    if (Character.isLetterOrDigit(currentChar)) {
+                        return Tokens.STRING;
+                    } else {
+                        System.out.println("Unexpected character");
+                        return null;
+                    }
             }
         }
         return null;
+    }
+
+    public String parseString() {
+        StringBuilder str = new StringBuilder();
+        // Skip opening quote
+        if (currentChar == '"') {
+            advance();
+        }
+        while (currentChar != '"' && currentChar != '\0') {
+            if (currentChar == '\\') {
+                advance();
+                switch (currentChar) {
+                    case 'n':
+                        str.append('\n');
+                        break;
+                    case 't':
+                        str.append('\t');
+                        break;
+                    case '"':
+                        str.append('"');
+                        break;
+                    case '\\':
+                        str.append('\\');
+                        break;
+                    default:
+                        str.append('\\').append(currentChar);
+                        break;
+                }
+            } else {
+                str.append(currentChar);
+            }
+            advance();
+        }
+        // Skip closing quote
+        if (currentChar == '"') {
+            advance();
+        }
+        return str.toString();
     }
 }

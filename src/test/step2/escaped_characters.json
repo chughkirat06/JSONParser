@@ -1,0 +1,4 @@
+{
+    "key1": "value with \\\"escaped\\\" characters",
+    "key2": "value with \\n newline"
+}

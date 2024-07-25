@@ -10,7 +10,8 @@ public enum Tokens {
     COMMA(','),
     TRUE('t'),
     FALSE('f'),
-    NULL('N');
+    NULL('n'),
+    STRING('s');
 
     private final char symbol;
 

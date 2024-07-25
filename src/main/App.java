@@ -1,14 +1,11 @@
 package main;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
-
-import javax.management.RuntimeErrorException;
 
 public class App {
     private static StringBuilder jsonContent;
@@ -69,7 +66,7 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String path = sc.nextLine();
-        readJsonFile(path);
+        processJsonFile(path);
 
     }
 }

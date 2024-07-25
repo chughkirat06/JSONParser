@@ -13,16 +13,38 @@ public class Parser {
         currentToken = lexar.nextToken();
     }
 
-    public boolean parseObject() {
-        if (currentToken == Tokens.BRACE_OPEN) {
+    private boolean parseKeyValuePair() {
+        if (currentToken == Tokens.QUOTE) {
+            String key = lexar.parseString();
             advance();
-            if (currentToken == Tokens.BRACE_CLOSE) {
+            if (currentToken == Tokens.SEMI_COLON) {
                 advance();
-                return true;
-            } else {
-                return false;
+                if (currentToken == Tokens.QUOTE) {
+                    String value = lexar.parseString();
+                    advance();
+                    return true;
+                }
             }
         }
         return false;
     }
+
+    public boolean parseObject() {
+        if (currentToken == Tokens.BRACE_OPEN) {
+            advance();
+            if (parseKeyValuePair()) {
+                while (currentToken == Tokens.COMMA) {
+                    advance();
+                    if (!parseKeyValuePair()) {
+                        return false;
+                    }
+                }
+                if (currentToken == Tokens.BRACE_CLOSE) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
