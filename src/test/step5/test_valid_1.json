@@ -1,0 +1,9 @@
+{
+    "name": "Prabhkirat Kaur",
+    "age": 26,
+    "isStudent": false,
+    "address": {
+        "street": "15 Main St",
+        "city": "Anytown"
+    }
+}
