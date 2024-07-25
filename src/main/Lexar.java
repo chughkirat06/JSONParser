@@ -56,16 +56,40 @@ public class Lexar {
                 case '"':
                     advance();
                     return Tokens.QUOTE;
+                case 't':
+                    if (match("true"))
+                        return Tokens.TRUE;
+                    break;
+                case 'f':
+                    if (match("false"))
+                        return Tokens.FALSE;
+                    break;
+                case 'n':
+                    if (match("null"))
+                        return Tokens.NULL;
+                    break;
                 default:
-                    if (Character.isLetterOrDigit(currentChar)) {
+                    if (Character.isLetter(currentChar))
                         return Tokens.STRING;
-                    } else {
-                        System.out.println("Unexpected character");
-                        return null;
-                    }
+                    if (Character.isDigit(currentChar) || currentChar == '-')
+                        return Tokens.NUMBER;
+                    System.out.println("Unexpected character");
+                    return null;
             }
         }
         return null;
+    }
+
+    private boolean match(String str) {
+        int start = position;
+        for (char c : str.toCharArray()) {
+            if (currentChar != c) {
+                position = start;
+                return false;
+            }
+            advance();
+        }
+        return true;
     }
 
     public String parseString() {
@@ -104,5 +128,14 @@ public class Lexar {
             advance();
         }
         return str.toString();
+    }
+
+    public double parseNumber() {
+        StringBuilder number = new StringBuilder();
+        while (Character.isDigit(currentChar) || currentChar == '.' || currentChar == '-') {
+            number.append(currentChar);
+            advance();
+        }
+        return Double.parseDouble(number.toString());
     }
 }

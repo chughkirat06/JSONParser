@@ -13,15 +13,38 @@ public class Parser {
         currentToken = lexar.nextToken();
     }
 
+    private boolean parseValue() {
+        switch (currentToken) {
+            case QUOTE:
+                lexar.parseString();
+                advance();
+                return true;
+            case NUMBER:
+                lexar.parseNumber();
+                advance();
+                return true;
+            case TRUE:
+                advance();
+                return true;
+            case FALSE:
+                advance();
+                return true;
+            case NULL:
+                advance();
+                return true;
+            default:
+                System.out.println("Unexpected token: " + currentToken);
+                return false;
+        }
+    }
+
     private boolean parseKeyValuePair() {
         if (currentToken == Tokens.QUOTE) {
-            String key = lexar.parseString();
+            lexar.parseString();
             advance();
             if (currentToken == Tokens.SEMI_COLON) {
                 advance();
-                if (currentToken == Tokens.QUOTE) {
-                    String value = lexar.parseString();
-                    advance();
+                if (parseValue()) {
                     return true;
                 }
             }
@@ -40,11 +63,11 @@ public class Parser {
                     }
                 }
                 if (currentToken == Tokens.BRACE_CLOSE) {
+                    advance();
                     return true;
                 }
             }
         }
         return false;
     }
-
 }
